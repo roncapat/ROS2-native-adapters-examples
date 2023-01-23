@@ -1,0 +1,42 @@
+cloud_to_depth:
+  ros__parameters:
+    source_topic: point_cloud
+    dest_topic: depth
+    # depth image are either encoded as uint16 or float. 
+    # - uint16 has mm resolution but requires 50% memory and bandwith than float.
+    # - float offers floating-point precision but is heavier.
+    as_float: true
+
+hal_stereolabs_zed2:
+  ros__parameters:
+    # (0) HD2K 	 | 2208*1242 (x2), available sensor_fps: 15 fps.
+    # (1) HD1080 | 1920*1080 (x2), available sensor_fps: 15, 30 fps.
+    # (2) HD720  | 1280*720 (x2), available sensor_fps: 15, 30, 60 fps.
+    # (3) VGA    | 672*376 (x2), available sensor_fps: 15, 30, 60, 100 fps. 
+    resolution: 3
+    sensor_fps: 15
+    frame_id: "camera"
+
+    depth_sensing:
+      output_topic: "point_cloud"
+      structured_cloud: true
+      publish_color: false
+      publish_normals: false
+      confidence_filter:
+        enable: True
+        threshold: 60
+      texture_confidence_filter: 
+        enable: True
+        threshold: 60
+      distance_limits:
+        min: 1.0
+        max: 2.5
+      # (1) PERFORMANCE | Computation mode optimized for speed.
+      # (2) QUALITY | Computation mode designed for challenging areas with untextured surfaces.
+      # (3) ULTRA | Computation mode favorising edges and sharpness. Requires more GPU memory and computation power. 
+      depth_mode: 1
+      fill_mode: false
+      depth_stabilization: 20 # [1-100]
+      output_res:
+        width: 672
+        height: 376

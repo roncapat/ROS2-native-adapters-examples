@@ -1,0 +1,49 @@
+cloud_to_depth:
+  ros__parameters:
+    source_topic: point_cloud
+    dest_topic: depth
+    # depth image are either encoded as uint16 or float. 
+    # - uint16 has mm resolution but requires 50% memory and bandwith than float.
+    # - float offers floating-point precision but is heavier.
+    as_float: true
+
+hal_lucidlabs_helios2:
+  ros__parameters:
+    output_topic: "point_cloud"
+    frame_id: "camera"
+    structured_cloud: true
+    publish_intensity: false
+    confidence_filter:
+      enable: True
+      threshold: 150
+    spatial_filter:
+      enable: true
+    flying_filter: 
+      enable: true
+      threshold: 10
+    # Options dumped with arv-tool
+      #Enumeration: 'Scan3dHDRMode'
+          #EnumEntry: (0) 'LowNoiseHDRX8'
+          #EnumEntry: (1) 'LowNoiseHDRX4'
+          #EnumEntry: (2) 'StandardHDR'
+          #EnumEntry: (3) 'Off'
+    hdr_mode: 3      
+    accumulate_frames: 1
+    # Options dumped with arv-tool
+      #Enumeration: 'ExposureTimeSelector'
+        #EnumEntry: (0) 'Exp62_5Us'
+        #EnumEntry: (1) 'Exp250Us'
+        #EnumEntry: (2) 'Exp1000Us'
+    exposure_level: 2
+    # Options dumped with arv-tool
+      #Enumeration: 'Scan3dOperatingMode'
+        #EnumEntry: (0) 'HighSpeedDistance2500mmSingleFreq'
+        #EnumEntry: (1) 'HighSpeedDistance1250mmSingleFreq'
+        #EnumEntry: (2) 'HighSpeedDistance625mmSingleFreq'
+        #EnumEntry: (3) 'Distance8300mmMultiFreq'
+        #EnumEntry: (4) 'Distance6000mmSingleFreq'
+        #EnumEntry: (5) 'Distance5000mmMultiFreq'
+        #EnumEntry: (6) 'Distance4000mmSingleFreq'
+        #EnumEntry: (7) 'Distance3000mmSingleFreq'
+        #EnumEntry: (8) 'Distance1250mmSingleFreq'
+    mode: 5

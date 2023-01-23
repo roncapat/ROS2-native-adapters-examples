@@ -15,13 +15,13 @@ def generate_launch_description():
     return LaunchDescription([
         
         Node(
-            package='cloud_to_depth',
+            package='cloud_as_depth',
             executable='CloudToDepthExecutable',
             name='cloud_to_depth',
             output={
                     "stdout": "screen",
                     "stderr": "screen",
             },
-            parameters=[os.path.join(get_package_share_directory("cloud_to_depth"), 'params', 'params.yaml')],
+            parameters=[os.path.join(get_package_share_directory("cloud_as_depth"), 'params', 'params.yaml')],
         )
 ])
