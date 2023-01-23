@@ -46,6 +46,7 @@ def generate_launch_description():
             name='demo_container',
             package='rclcpp_components',
             executable='component_container_mt',
+            namespace='',
             composable_node_descriptions=[
                 ComposableNode(
                     package='hal_lucidlabs_helios2',
