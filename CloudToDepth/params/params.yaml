@@ -1,0 +1,8 @@
+cloud_to_depth:
+  ros__parameters:
+    source_topic: point_cloud
+    dest_topic: depth
+    # depth image are either encoded as uint16 or float. 
+    # - uint16 has mm resolution but requires 50% memory and bandwith than float.
+    # - float offers floating-point precision but is heavier.
+    as_float: true
