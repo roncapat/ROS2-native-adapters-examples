@@ -8,7 +8,7 @@
 #include <sensor_msgs/msg/image.hpp>
 #include <cv_bridge/cv_bridge.h>
 
-#include "native_adapters/PCL_2.hpp"
+#include "native_adapters/PCL.hpp"
 
 namespace perception {
 
@@ -22,12 +22,12 @@ class CloudToDepth : public rclcpp::Node {
   std::string source_topic, dest_topic;
   bool as_float = false;
 
-  using Adapter = rclcpp::adapt_type<StampedPointCloud2>::as<sensor_msgs::msg::PointCloud2>;
+  using Adapter = rclcpp::adapt_type<StampedPointCloud_PCL>::as<sensor_msgs::msg::PointCloud2>;
 
   rclcpp::Subscription<Adapter>::SharedPtr subscription_;
   rclcpp::Publisher<sensor_msgs::msg::Image>::SharedPtr publisher_;
 
-  void callback_pointcloud(const std::shared_ptr<const StampedPointCloud2> &msg);
+  void callback_pointcloud(const std::shared_ptr<const StampedPointCloud_PCL> &msg);
 
   template <typename PointT>
   void process_message(const std_msgs::msg::Header &header, const pcl::PointCloud<PointT> &msg);

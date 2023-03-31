@@ -26,7 +26,7 @@ CloudToDepth::CloudToDepth(const rclcpp::NodeOptions & options)
     std::bind(&CloudToDepth::callback_pointcloud, this, std::placeholders::_1));
 }
 
-void CloudToDepth::callback_pointcloud(const std::shared_ptr<const StampedPointCloud2> &msg) {
+void CloudToDepth::callback_pointcloud(const std::shared_ptr<const StampedPointCloud_PCL> &msg) {
   std::visit([&, header = msg->header](auto&& cloud) {this->process_message(header, cloud);}, msg->cloud);
 } 
 
